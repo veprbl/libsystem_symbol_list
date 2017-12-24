@@ -15,9 +15,11 @@ nm -jgU -arch i386 /usr/lib/system/libsystem_kernel.dylib > system_kernel_symbol
 
 popd 1>/dev/null 2>/dev/null
 
+branchName="$productVersion"
 git init
-git add "$productVersion"
-git commit -m "bump"
-git checkout -b "$productVersion"
 git remote add origin git@github.com:veprbl/libsystem_symbol_list.git
-git push origin "$productVersion"
+git fetch origin
+git checkout -t origin/"$branchName" || git checkout -b "$branchName"
+git add "$branchName"
+git commit -m "bump"
+git push origin "$branchName"
