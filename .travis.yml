@@ -16,4 +16,4 @@ before_install:
  - brew outdated git || brew upgrade git
  - brew outdated openssh || brew upgrade openssh
 script:
- - GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa" ./gen_symb_lists.sh
+ - GIT_SSH_COMMAND="ssh -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa" ./gen_symbol_lists.sh

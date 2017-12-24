@@ -5,7 +5,9 @@ set -e
 
 productVersion=`sw_vers -productVersion`
 
-git remote add set-url git@github.com:veprbl/libsystem_symbol_list.git
+rm -rf .git
+git init
+git remote add origin git@github.com:veprbl/libsystem_symbol_list.git
 git fetch origin
 branchName="$productVersion"
 git checkout -t origin/"$branchName" || git checkout -b "$branchName"
