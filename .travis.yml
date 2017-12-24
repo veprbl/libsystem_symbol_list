@@ -1,0 +1,21 @@
+os: osx
+matrix:
+  include:
+    - osx_image: xcode6.4 # 10.10
+    - osx_image: xcode8 # 10.11
+    - osx_image: xcode9.2 # xcode9.2
+before_install:
+ - rm -rf .git
+ - openssl aes-256-cbc -K $encrypted_cc9b2a15c808_key -iv $encrypted_cc9b2a15c808_iv -in id_rsa.enc -out id_rsa -d
+ - mkdir ~/.ssh || true
+ - chmod 700 ~/.ssh
+ - mv id_rsa ~/.ssh/
+ - chmod 600 ~/.ssh/id_rsa
+ - git config --global user.email "nowhere@example.com"
+ - git config --global user.name "travis"
+ - brew update
+ - brew outdated git || brew upgrade git
+ - brew outdated openssh || brew upgrade openssh
+script:
+ - GIT_SSH_COMMAND="ssh -vvv -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa" ./gen_symb_lists.sh
+   #- ssh-agent sh -c "ssh-add $HOME/.ssh/id_rsa; ./gen_symb_lists.sh"
