@@ -18,4 +18,3 @@ before_install:
  - brew outdated openssh || brew upgrade openssh
 script:
  - GIT_SSH_COMMAND="ssh -vvv -o StrictHostKeyChecking=no -i $HOME/.ssh/id_rsa" ./gen_symb_lists.sh
-   #- ssh-agent sh -c "ssh-add $HOME/.ssh/id_rsa; ./gen_symb_lists.sh"
