@@ -5,6 +5,11 @@ set -e
 
 productVersion=`sw_vers -productVersion`
 
+git remote add set-url git@github.com:veprbl/libsystem_symbol_list.git
+git fetch origin
+branchName="$productVersion"
+git checkout -t origin/"$branchName" || git checkout -b "$branchName"
+
 mkdir "$productVersion" || true
 pushd "$productVersion" 1>/dev/null 2>/dev/null
 
@@ -15,11 +20,6 @@ nm -jgU -arch i386 /usr/lib/system/libsystem_kernel.dylib > system_kernel_symbol
 
 popd 1>/dev/null 2>/dev/null
 
-branchName="$productVersion"
-git init
-git remote add origin git@github.com:veprbl/libsystem_symbol_list.git
-git fetch origin
-git checkout -t origin/"$branchName" || git checkout -b "$branchName"
 git add "$branchName"
 git commit -m "bump"
 git push origin "$branchName"
