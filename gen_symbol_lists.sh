@@ -23,5 +23,5 @@ nm -jgU -arch i386 /usr/lib/system/libsystem_kernel.dylib > system_kernel_symbol
 popd 1>/dev/null 2>/dev/null
 
 git add "$branchName"
-git commit -m "bump"
+git diff --cached --quiet || git commit -m "bump"
 git push origin "$branchName"
